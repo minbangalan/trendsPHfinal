@@ -37,7 +37,7 @@ const Home = () => {
   return (
     <Helmet title={"Home"}>
     <section className="hero__section">
-    <Container> 
+    <Container id='serv--cont'> 
         <Row>
           <Col lg="6" md="6">
             <div className='hero__content'>
@@ -64,7 +64,7 @@ const Home = () => {
         <Col lg='12' className='text-center mb-5'>
          <h2 className='section__title'>Trending Clothes</h2>
         </Col>
-        <Row>
+        <Row id='trend_row'>
           <ProductList data={trendingClothes} id="trend_prod"/>
         </Row>
       </Container>

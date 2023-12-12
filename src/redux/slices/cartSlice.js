@@ -5,8 +5,12 @@ const initialState = {
   cartItems: localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [],
-  totalQuantity: 0,
-  totalAmount: 0,
+  totalQuantity: localStorage.getItem("totalQuantity")
+  ? JSON.parse(localStorage.getItem("totalQuantity"))
+  : 0,
+  totalAmount: localStorage.getItem("totalAmount")
+  ? JSON.parse(localStorage.getItem("totalAmount"))
+  : 0,
 };
 
 const cartSlice = createSlice({
@@ -31,12 +35,18 @@ const cartSlice = createSlice({
         );
       }
 
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-
       state.totalAmount = state.cartItems.reduce(
         (total, item) => total + Number(item.price) * Number(item.cartQuantity),
         0
       );
+
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      localStorage.setItem("totalQuantity", JSON.stringify(state.totalQuantity));
+      localStorage.setItem("totalAmount", JSON.stringify(state.totalAmount));
+
+
+
+      
     },
 
     removeFromCart(state, action) {
@@ -47,12 +57,17 @@ const cartSlice = createSlice({
       state.cartItems = nextCartItems;
       toast.info(`${action.payload.productName} removed from cart`);
 
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-
       state.totalAmount = state.cartItems.reduce(
         (total, item) => total + Number(item.price) * Number(item.cartQuantity),
         0
       );
+
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      
+      localStorage.setItem("totalQuantity", JSON.stringify(state.totalQuantity));
+      localStorage.setItem("totalAmount", JSON.stringify(state.totalAmount));
+
+      
     },
 
     decreaseCart(state, action) {
@@ -63,6 +78,8 @@ const cartSlice = createSlice({
         state.cartItems[itemIndex].cartQuantity -= 1;
 
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        localStorage.setItem("totalQuantity", JSON.stringify(state.totalQuantity));
+        localStorage.setItem("totalAmount", JSON.stringify(state.totalAmount));
 
         state.totalAmount = state.cartItems.reduce(
           (total, item) =>
@@ -77,14 +94,17 @@ const cartSlice = createSlice({
         state.cartItems = nextCartItems;
         toast.info(`${action.payload.productName} removed from cart`);
         
-        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-        
         state.totalAmount = state.cartItems.reduce(
           (total, item) =>
             total + Number(item.price) * Number(item.cartQuantity),
           0
         );
       }
+      
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      localStorage.setItem("totalQuantity", JSON.stringify(state.totalQuantity));
+      localStorage.setItem("totalAmount", JSON.stringify(state.totalAmount));
+      
     },
 
     increaseCart: (state, action) => {
@@ -100,17 +120,25 @@ const cartSlice = createSlice({
         toast.success(
           `${action.payload.productName} added to cart successfully!`
         );
-      }
-
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        
       
+      }
       state.totalAmount = state.cartItems.reduce(
         (total, item) => total + Number(item.price) * Number(item.cartQuantity),
         0
       );
+
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      localStorage.setItem("totalQuantity", JSON.stringify(state.totalQuantity));
+      localStorage.setItem("totalAmount", JSON.stringify(state.totalAmount));
+      
     },
 
-    getTotal(state, action) {
+    clearCart: (state) => {
+      state.cartItems = [];
+    },
+
+    getTotal(state) {
       let { quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
           const { cartQuantity } = cartItem;
@@ -134,6 +162,7 @@ export const {
   removeFromCart,
   decreaseCart,
   increaseCart,
+  clearCart,
   getTotal,
 } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -4,7 +4,7 @@ import React from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import useGetData from '../custom-hooks/useGetData'
 import { ThreeDots } from 'react-loader-spinner'
-import '../styles/users.css'
+
 import { db } from "../firebase.config";
 import { doc, deleteDoc } from "firebase/firestore";
 import { toast } from "react-toastify";

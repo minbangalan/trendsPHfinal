@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import useAuth from "../custom-hooks/useAuth";
-import "../styles/admin-nav.css";
+
 import logo from "../assets/images/tp2white.png";
 import { NavLink } from "react-router-dom";
 

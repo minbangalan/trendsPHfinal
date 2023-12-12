@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-import '../styles/dashboard.css'
+
 import AllProducts from "./AllProducts";
 
 import useGetData from '../custom-hooks/useGetData'

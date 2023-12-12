@@ -1,5 +1,11 @@
 
 
+
+.card__input .input{
+    border-style: solid;
+    border-width: 0.1px;
+    border-color: #757473;
+}
 .billing__form .form__group input{
     border: 1px solid #757473;
 }

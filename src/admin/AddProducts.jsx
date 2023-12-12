@@ -12,7 +12,7 @@ import { collection, addDoc } from "firebase/firestore";
 
 import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
-import "../styles/add-products.css";
+
 
 const AddProducts = () => {
   const [enterName, setEnterName] = useState("");
